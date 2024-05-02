@@ -2,5 +2,23 @@
   "dependencies": {
     "express": "^4.19.2",
     "serialport": "^12.0.0"
-  }
+  },
+  "name": "motorola-tetra-network-controller",
+  "description": "This project aims to solve a very specific problem; being able to control & monitor your radios on a TETRA network.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jeroen2006/Motorola-Tetra-Network-Controller.git"
+  },
+  "author": "Jeroen de Kuijper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jeroen2006/Motorola-Tetra-Network-Controller/issues"
+  },
+  "homepage": "https://github.com/Jeroen2006/Motorola-Tetra-Network-Controller#readme"
 }
