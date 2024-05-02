@@ -14,16 +14,22 @@ class TetraController {
         this.#serialPort = new MotorolaSerialPort(serialPort, baudRate);
         this.#serialPort.on('data', this.#onData.bind(this));
 
+        this.countryCode = null;
+        this.networkCode = null;
+        this.subscriberNumber = null;
+        this.signalStrength = null;
+        this.sdsAvailable = true;
+
         this.#serialPort.write('AT+CTSP=1,3,130\r\n') //Activate SDS pipe to PEI 
         this.#serialPort.write('AT+CTSP=1,3,131\r\n') //Activate GPS pipe to PEI
-        //this.#serialPort.write('AT+CTSP=1,2,20\r\n') //Register SDS status handling
+        this.#serialPort.write('AT+CTSP=1,2,20\r\n') //Register SDS status handling
         this.#serialPort.write('AT+CTSP=1,3,10\r\n') //Register GPS LIP hanadling
 
         setInterval(() => {
             this.#serialPort.write('AT+CTBCT?\r\n');
             this.#serialPort.write('AT+CSQ?\r\n');
             this.#serialPort.write('AT+CNUM?\r\n');
-        }, 10000000);
+        }, 5000);
 
         var self = this;
         setInterval(() => this.#sendMessages(self), 1000);
@@ -77,7 +83,7 @@ class TetraController {
 
     #sendMessages(self){
         var unsentMessages = self.#sentMessages.find(m => m.sent == false && m.sentAt == null);
-        if(unsentMessages){
+        if(unsentMessages && self.sdsAvailable){
             const serialData = unsentMessages.toSerial(unsentMessages?.presenceCheck || false)
             const hexLength = serialData.length*4
             unsentMessages.sentAt = new Date();

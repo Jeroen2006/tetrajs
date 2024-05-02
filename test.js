@@ -14,21 +14,21 @@ controller.on('gps', (message) => {
     console.log(message);
 });
 
-controller.presenceCheck(9015080).then((response) => {
-    console.log(`9015080: ${response}`);
-});
-controller.presenceCheck(9019110).then((response) => {
-    console.log(`9019110: ${response}`);
-});
-controller.presenceCheck(9012113).then((response) => {
-    console.log(`9012113: ${response}`);
-});
-controller.presenceCheck(9012112).then((response) => {
-    console.log(`9012112: ${response}`);
-});
-controller.presenceCheck(9018300).then((response) => {
-    console.log(`9018300: ${response}`);
-});
+// controller.presenceCheck(9015080).then((response) => {
+//     console.log(`9015080: ${response}`);
+// });
+// controller.presenceCheck(9019110).then((response) => {
+//     console.log(`9019110: ${response}`);
+// });
+// controller.presenceCheck(9012113).then((response) => {
+//     console.log(`9012113: ${response}`);
+// });
+// controller.presenceCheck(9012112).then((response) => {
+//     console.log(`9012112: ${response}`);
+// });
+// controller.presenceCheck(9018300).then((response) => {
+//     console.log(`9018300: ${response}`);
+// });
 
 // const message = controller.sendMessage('', '9019110');
 
