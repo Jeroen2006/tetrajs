@@ -28,10 +28,13 @@ class TetraController {
 
         setTimeout(() => {
             this.#serialPort.write('AT+CTBCT?\r\n');
-            this.#serialPort.write('AT+CSQ?\r\n');
             this.#serialPort.write('AT+CTOM?\r\n');
             this.#serialPort.write('AT+CNUM?\r\n');
         }, 2000);
+
+        setInterval(() => {
+            this.#serialPort.write('AT+CSQ?\r\n');
+        }, 1000);
 
         var self = this;
         setInterval(() => this.#sendMessages(self), 1000);
