@@ -2,16 +2,17 @@
 
 This project aims to solve a very specific problem; being able to control & monitor your radios on a TETRA network. 
 
-Currently the code is a mess, I'm still in the testing phase and will clean up the code later. You can always create a fork and do that yourself. 
 
 # Goals
 
  1. Webinterface/Dashboard
  2. ~~Send & Receive SDS messages~~
  3. ~~Receive GPS Locations~~
- 4. SDS Remote Control
- 5. Status Support
- 6. DMO Support
+ 4. ~~Presence check ~~
+ 5. SDS Remote Control
+ 6. Status Support
+ 7. DMO Support
+ 8. Talkgroup monitoring?
 
 # Running yourself
 I cannot guarantee this will work on all Motorola radios... I'm using mtm5400, mtp850(s) and mtp6550 radios so I suggest you use one of those too (mtm5400 is preferred). 
