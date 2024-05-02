@@ -116,6 +116,14 @@ class TetraController {
             });
         }
 
+        if(serialData?.type == 'statusMessage'){
+            this.#eventCallbacks.forEach(callback => {
+                if(callback.event == 'status'){
+                    callback.callback(serialData);
+                }
+            });
+        }
+
         if(serialData?.type == 'operatingMode'){
             switch(serialData.mode){
                 case '0':

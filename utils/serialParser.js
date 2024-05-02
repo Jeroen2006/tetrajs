@@ -75,6 +75,7 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
 
             if(service == '12' && !isGpsMessage) return handleDataMessage(value, lineTwo, serialPort);
             if(service == '12' && isGpsMessage) return handleGpsMessage(value, lineTwo, serialPort);
+            if(service == '13') return handleStatusMessage(value, lineTwo, serialPort);
         case '+CMGS':
             var [zero, type, messageReference] = value.split(",");
             if(type == null) break;
@@ -82,6 +83,17 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
                 type: 'messageSent',
                 messageId: messageReference
             }
+    }
+
+}
+
+function handleStatusMessage(value, lineTwo, serialPort){
+    var [service, callingParty, callingPartyType, calledParty, calledPartyType, messageLength] = value.split(",");
+
+    return {
+        type: 'statusMessage',
+        callingParty,
+        status: hexToInt(lineTwo),
     }
 
 }

@@ -14,6 +14,11 @@ controller.on('gps', (message) => {
     console.log(message);
 });
 
+
+controller.on('status', (message) => {
+    console.log(message);
+});
+
 // controller.presenceCheck(9015080).then((response) => {
 //     console.log(`9015080: ${response}`);
 // });
