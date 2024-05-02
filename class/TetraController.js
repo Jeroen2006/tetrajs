@@ -19,17 +19,19 @@ class TetraController {
         this.subscriberNumber = null;
         this.signalStrength = null;
         this.sdsAvailable = true;
+        this.operatingMode = null;
 
         this.#serialPort.write('AT+CTSP=1,3,130\r\n') //Activate SDS pipe to PEI 
         this.#serialPort.write('AT+CTSP=1,3,131\r\n') //Activate GPS pipe to PEI
-        this.#serialPort.write('AT+CTSP=1,2,20\r\n') //Register SDS status handling
         this.#serialPort.write('AT+CTSP=1,3,10\r\n') //Register GPS LIP hanadling
+        this.#serialPort.write('AT+CTSP=1,2,20\r\n') //Register SDS status handling
 
-        setInterval(() => {
+        setTimeout(() => {
             this.#serialPort.write('AT+CTBCT?\r\n');
             this.#serialPort.write('AT+CSQ?\r\n');
+            this.#serialPort.write('AT+CTOM?\r\n');
             this.#serialPort.write('AT+CNUM?\r\n');
-        }, 5000);
+        }, 2000);
 
         var self = this;
         setInterval(() => this.#sendMessages(self), 1000);
@@ -107,6 +109,29 @@ class TetraController {
             this.#eventCallbacks.forEach(callback => {
                 if(callback.event == 'messageReceived'){
                     callback.callback(serialData);
+                }
+            });
+        }
+
+        if(serialData?.type == 'operatingMode'){
+            switch(serialData.mode){
+                case '0':
+                    this.operatingMode = 'TMO';
+                    break;
+                case '1':
+                    this.operatingMode = 'DMO';
+                    break;
+                case '6,0':
+                    this.operatingMode = 'DMO REPEATER';
+                    break;
+                case '5,3':
+                    this.operatingMode = 'GATEWAY';
+                    break;
+            }
+        
+            this.#eventCallbacks.forEach(callback => {
+                if(callback.event == 'operatingMode'){
+                    callback.callback(this.operatingMode);
                 }
             });
         }

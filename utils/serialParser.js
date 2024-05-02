@@ -10,7 +10,9 @@ function serialParser(data, serialPort) {
         return;
     }
 
-    var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM'];
+    //console.log(data);
+
+    var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM'];
     var twoLineCommands = ['+CTSDSR'];
 
     var unkownCommand = true;
@@ -45,6 +47,9 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
     const {command, value} = extractCommand(lineOne);
 
     switch(command){
+        case '+CTOM':
+            return { type: 'operatingMode', mode: value };
+            break;
         case '+CTBCT':
             state = new Byte(value.split(",")[1]);
             const sdsAvailable = state.getBit(6);
