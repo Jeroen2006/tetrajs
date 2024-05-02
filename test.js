@@ -11,24 +11,26 @@ controller.on('messageReceived', (message) => {
 });
 
 controller.setIssi(9029999);
-controller.dmo();
-
+controller.tmo();
 
 controller.on('gps', (message) => {
     console.log(message);
 });
 
-
 controller.on('status', (message) => {
     console.log(message);
 });
 
-// controller.presenceCheck(9015080).then((response) => {
-//     console.log(`9015080: ${response}`);
-// });
-// controller.presenceCheck(9019110).then((response) => {
-//     console.log(`9019110: ${response}`);
-// });
+controller.on('time', (time) => {
+    console.log(time);
+});
+
+// // controller.presenceCheck(9015080).then((response) => {
+// //     console.log(`9015080: ${response}`);
+// // });
+// // controller.presenceCheck(9019110).then((response) => {
+// //     console.log(`9019110: ${response}`);
+// // });
 // controller.presenceCheck(9012113).then((response) => {
 //     console.log(`9012113: ${response}`);
 // });
@@ -39,7 +41,7 @@ controller.on('status', (message) => {
 //     console.log(`9018300: ${response}`);
 // });
 
-// const message = controller.sendMessage('hry', '9019110');
+// const message = controller.sendMessage('hry', '9018300');
 
 // message.sentPromise.then(() => {
 //     console.log('Message sent');

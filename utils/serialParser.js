@@ -10,8 +10,10 @@ function serialParser(data, serialPort) {
         return;
     }
 
-    var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM'];
+    var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM', '+CCLK'];
     var twoLineCommands = ['+CTSDSR'];
+
+    //console.log(data);
 
     var unkownCommand = true;
 
@@ -45,6 +47,18 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
     const {command, value} = extractCommand(lineOne);
 
     switch(command){
+        case '+CCLK':
+            var [date, time] = value.split(",");
+            var [year, month, day] = date.split("/");
+            var [hours, minutes, seconds] = time.split(":");
+            seconds = seconds.split("+")[0];
+            var halfHoursOffset = parseInt(time.split("+")[1]);
+            hours = parseInt(hours) + (halfHoursOffset / 2);
+
+            var date = new Date(parseInt(year) + 2000, parseInt(month) - 1, day, hours, minutes, seconds);
+
+            return { date };
+            break;
         case '+CTOM':
             return { type: 'operatingMode', mode: value };
             break;
@@ -169,6 +183,12 @@ function handleDataMessage(value, lineTwo, serialPort){
 function extractCommand(line){
     var command = line.split(":")[0].trim();
     var value = line.split(":")[1].trim();
+
+    //its possible that the value also contains : so we need to join the rest of the line
+    for(var i = 2; i < line.split(":").length; i++){
+        value += ':' + line.split(":")[i].trim();
+    }
+
     return {command, value}
 }
 

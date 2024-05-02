@@ -35,6 +35,7 @@ class TetraController {
 
         setInterval(() => {
             this.#serialPort.write('AT+CSQ?\r\n');
+            this.#serialPort.write('AT+CCLK?\r\n');
         }, 1000);
 
         var self = this;
@@ -128,6 +129,14 @@ class TetraController {
             this.#eventCallbacks.forEach(callback => {
                 if(callback.event == 'messageReceived'){
                     callback.callback(serialData);
+                }
+            });
+        }
+
+        if(serialData?.date != null){
+            this.#eventCallbacks.forEach(callback => {
+                if(callback.event == 'time'){
+                    callback.callback(serialData.date);
                 }
             });
         }
