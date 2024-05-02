@@ -10,8 +10,8 @@ This project aims to solve a very specific problem; being able to control & moni
  3. ~~Receive GPS Locations~~
  4. ~~Presence check~~
  5. SDS Remote Control
- 6. Status Support
- 7. DMO Support
+ 6. ~~Status Support~~
+ 7. ~~DMO Support~~ (Tested)
  8. Talkgroup monitoring?
 
 # Running yourself
@@ -22,4 +22,4 @@ I cannot guarantee this will work on all Motorola radios... I'm using mtm5400, m
 4. Set the correct device in the code.
 
 
-If everything is configured properly you can run `node tmo.js` and it should start working. I'm developing while being registered on a TMO network, but it should also work in DMO. 
+If everything is configured properly you can run `node test.js` and it should start working. I'm developing while being registered on a TMO network, but it should also work in DMO. 
