@@ -30,6 +30,7 @@ class TetraController {
             this.#serialPort.write('AT+CTBCT?\r\n');
             this.#serialPort.write('AT+CTOM?\r\n');
             this.#serialPort.write('AT+CNUM?\r\n');
+            
         }, 2000);
 
         setInterval(() => {
@@ -55,6 +56,14 @@ class TetraController {
         });
 
         return sdsMessage;
+    }
+
+    tmo(){
+        this.#serialPort.write('AT+CTOM=0\r\n');
+    }
+
+    dmo(){
+        this.#serialPort.write('AT+CTOM=1\r\n');
     }
 
     presenceCheck(issi, timeout = 10000){

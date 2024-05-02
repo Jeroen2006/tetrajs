@@ -10,8 +10,6 @@ function serialParser(data, serialPort) {
         return;
     }
 
-    //console.log(data);
-
     var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM'];
     var twoLineCommands = ['+CTSDSR'];
 
@@ -65,7 +63,7 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
         case '+CNUM':
             var [zero, number] = value.split(",");
             countryCode = parseInt(number.substring(0, 3));
-            networkCode = parseInt(number.substring(4, 7));
+            networkCode = parseInt(number.substring(4, 8));
             subscriberNumber = parseInt(number.substring(8));
             return { countryCode, networkCode, subscriberNumber };
             break;

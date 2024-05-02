@@ -1,7 +1,7 @@
 const TetraController = require('./class/TetraController');
 
 const controller = new TetraController({
-    serialPort: 'COM11'
+    serialPort: 'COM29'
 });
 
 controller.on('messageReceived', (message) => {
@@ -9,6 +9,8 @@ controller.on('messageReceived', (message) => {
 
     console.log(message);
 });
+
+controller.dmo();
 
 controller.on('gps', (message) => {
     console.log(message);
@@ -35,7 +37,7 @@ controller.on('status', (message) => {
 //     console.log(`9018300: ${response}`);
 // });
 
-// const message = controller.sendMessage('', '9019110');
+// const message = controller.sendMessage('hry', '9019110');
 
 // message.sentPromise.then(() => {
 //     console.log('Message sent');
