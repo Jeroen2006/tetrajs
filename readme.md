@@ -8,7 +8,7 @@ This project aims to solve a very specific problem; being able to control & moni
  1. Webinterface/Dashboard
  2. ~~Send & Receive SDS messages~~
  3. ~~Receive GPS Locations~~
- 4. ~~Presence check ~~
+ 4. ~~Presence check~~
  5. SDS Remote Control
  6. Status Support
  7. DMO Support
