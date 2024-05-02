@@ -1,7 +1,7 @@
 const TetraController = require('./class/TetraController');
 
 const controller = new TetraController({
-    serialPort: 'COM29'
+    serialPort: 'COM11'
 });
 
 controller.on('messageReceived', (message) => {
@@ -10,7 +10,9 @@ controller.on('messageReceived', (message) => {
     console.log(message);
 });
 
+controller.setIssi(9029999);
 controller.dmo();
+
 
 controller.on('gps', (message) => {
     console.log(message);

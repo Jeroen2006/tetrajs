@@ -6,7 +6,7 @@ const { SerialPort, ReadlineParser  } = require('serialport')
 class MotorolaSerialPort {
     #listeners = []
     #writeQueue = []
-    #reconnect = false
+    #reconnect = true
 
     /**
      * Creates an instance of MotorolaSerialPort.
@@ -26,6 +26,44 @@ class MotorolaSerialPort {
                     this._serialport.write(data)
                 }
             }, 100);
+
+            console.log('open')
+
+            this.#listeners.forEach(listener => {
+                if (listener.event === 'open') {
+                    listener.callback()
+                }
+            })
+        })
+
+        this._serialport.on('error', (error) => {
+            console.log('error', error)
+            if (this.#reconnect) {
+                setTimeout(() => {
+                    this._serialport.open()
+                }, 1000)
+            }
+
+            this.#listeners.forEach(listener => {
+                if (listener.event === 'error') {
+                    listener.callback(error)
+                }
+            })
+        })
+
+        this._serialport.on('close', () => {
+            console.log('close')
+            if (this.#reconnect) {
+                setTimeout(() => {
+                    this._serialport.open()
+                }, 1000)
+            }
+
+            this.#listeners.forEach(listener => {
+                if (listener.event === 'close') {
+                    listener.callback()
+                }
+            })
         })
     }
 

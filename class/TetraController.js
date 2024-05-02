@@ -21,17 +21,17 @@ class TetraController {
         this.sdsAvailable = true;
         this.operatingMode = null;
 
-        this.#serialPort.write('AT+CTSP=1,3,130\r\n') //Activate SDS pipe to PEI 
-        this.#serialPort.write('AT+CTSP=1,3,131\r\n') //Activate GPS pipe to PEI
-        this.#serialPort.write('AT+CTSP=1,3,10\r\n') //Register GPS LIP hanadling
-        this.#serialPort.write('AT+CTSP=1,2,20\r\n') //Register SDS status handling
-
-        setTimeout(() => {
+        this.#serialPort.on('open', () =>{
+            this.#serialPort.write('AT+CTSP=1,3,130\r\n') //Activate SDS pipe to PEI 
+            this.#serialPort.write('AT+CTSP=1,3,131\r\n') //Activate GPS pipe to PEI
+            this.#serialPort.write('AT+CTSP=1,3,10\r\n') //Register GPS LIP hanadling
+            this.#serialPort.write('AT+CTSP=1,2,20\r\n') //Register SDS status handling
+    
+            this.#serialPort.write('AT+CREG?\r\n');
             this.#serialPort.write('AT+CTBCT?\r\n');
             this.#serialPort.write('AT+CTOM?\r\n');
             this.#serialPort.write('AT+CNUM?\r\n');
-            
-        }, 2000);
+        });
 
         setInterval(() => {
             this.#serialPort.write('AT+CSQ?\r\n');
@@ -56,6 +56,13 @@ class TetraController {
         });
 
         return sdsMessage;
+    }
+
+    setIssi(issi){
+        setTimeout(() => {
+            if(this.subscriberNumber == issi) return;
+            this.#serialPort.write(`AT+CNUMF=0,${issi}\r\n`);
+        }, 2000);
     }
 
     tmo(){
