@@ -43,16 +43,38 @@ controller.on('status', (message) => {
 //     console.log(`9018300: ${response}`);
 // });
 
-//const message1 = controller.sendMessage('Kom ETEN', '9019110', { autoOpen: true, readReport: false, deliveredReport: true });
+
 setTimeout(() => {
-    //controller.sendMessage('TEST', '9015080', { autoOpen: true, readReport: false, deliveredReport: true });
-    controller.sendMessage('TEST', '9019110', { autoOpen: true, readReport: false, deliveredReport: true });
-    //controller.sendMessage('TEST', '9012113', { autoOpen: true, readReport: false, deliveredReport: true });
+    var msg = 'Dit is maar een testbericht';
+    const config = { autoOpen: true, readReport: false, deliveredReport: false }
+
+    //const message1 = controller.sendMessage(msg, '9019110', config);
+    //const message2 = controller.sendMessage(msg, '9015080', config);
+    //const message3 = controller.sendMessage(msg, '9012113', config);
+    const message4 = controller.sendMessage(msg, '9018300', config);
+    //const message5 = controller.sendMessage(msg, '9012112', config);
 }, 1000);
-// const message3 = controller.sendMessage('Kom ETEN', '9018300', { autoOpen: true, readReport: false, deliveredReport: true });
-// const message2 = controller.sendMessage('Kom ETEN', '9012112', { autoOpen: true, readReport: false, deliveredReport: true });
-// const message4 = controller.sendMessage('Kom ETEN', '9012113', { autoOpen: true, readReport: false, deliveredReport: true });
-// const message5 = controller.sendMessage('Kom ETEN', '9015080', { autoOpen: true, readReport: false, deliveredReport: true });
+
+controller.on('sendMessageReceived', (message) => {
+    console.log(`Message received by ${message.sentTo}`);
+});
+
+controller.on('sendMessageRead', (message) => {
+    onsole.log(`Message read by ${message.sentTo}`);
+});
+
+
+
+// setTimeout(() => {
+//         const config = { autoOpen: true, readReport: false, deliveredReport: false }
+    
+//         const message1 = controller.sendMessage('wie', '9019110', config);
+//         const message2 = controller.sendMessage('dit', '9015080', config);
+//         const message3 = controller.sendMessage('leest', '9012113', config);
+//         const message4 = controller.sendMessage('is', '9018300', config);
+//         const message5 = controller.sendMessage('gek', '9012112', config);
+//     }, 1000);
+
 
 // message1.sentPromise.then(() => {
 //     const message2 = controller.sendMessage('Kom ETEN', '9019110', { autoOpen: true, readReport: false,  deliveredReport: false});
