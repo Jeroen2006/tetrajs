@@ -45,7 +45,9 @@ controller.on('status', (message) => {
 
 //const message1 = controller.sendMessage('Kom ETEN', '9019110', { autoOpen: true, readReport: false, deliveredReport: true });
 setTimeout(() => {
-    const message1 = controller.sendMessage('TEST', '9015080', { autoOpen: true, readReport: false, deliveredReport: true });
+    //controller.sendMessage('TEST', '9015080', { autoOpen: true, readReport: false, deliveredReport: true });
+    controller.sendMessage('TEST', '9019110', { autoOpen: true, readReport: false, deliveredReport: true });
+    //controller.sendMessage('TEST', '9012113', { autoOpen: true, readReport: false, deliveredReport: true });
 }, 1000);
 // const message3 = controller.sendMessage('Kom ETEN', '9018300', { autoOpen: true, readReport: false, deliveredReport: true });
 // const message2 = controller.sendMessage('Kom ETEN', '9012112', { autoOpen: true, readReport: false, deliveredReport: true });
