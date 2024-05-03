@@ -39,7 +39,6 @@ class TetraController {
         }, 1000);
 
         var self = this;
-        setInterval(() => this.#sendMessages(self), 1000);
     }
 
     sendMessage(message, recipient, options){
@@ -47,9 +46,10 @@ class TetraController {
         if(message.length > 160) return;
 
         const messageId = this._getMessageId();
-        const sdsMessage = new SDSSentMessage(recipient, message, messageId, new Date(), false, null, options?.deliveredReport || true, false, null, options?.readReport || true);
+        const sdsMessage = new SDSSentMessage(recipient, message, messageId, new Date(), false, null, options?.deliveredReport, false, null, options?.readReport);
         sdsMessage.autoOpen = options?.autoOpen || false;
         this.#sentMessages.push(sdsMessage);
+        if(this.#sentMessages.length == 1) this.#sendMessages(this);
 
         this.#eventCallbacks.forEach(callback => {
             if(callback.event == 'sentMessageCreate'){
@@ -110,8 +110,11 @@ class TetraController {
             const serialData = unsentMessages.toSerial(unsentMessages?.presenceCheck || false)
             const hexLength = serialData.length*4
             unsentMessages.sentAt = new Date();
-            
             this.#serialPort.write(`AT+CMGS=${unsentMessages.sentTo},${hexLength}\r\n${serialData}\x1A`);
+
+            unsentMessages.sentPromise.then(() => {
+                self.#sendMessages(self);
+            });
         }
     }
 

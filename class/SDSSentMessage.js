@@ -8,10 +8,10 @@ class SDSSentMessage {
         this.createdAt = createdAt || new Date();
         this.sent = sent || false;
         this.sentAt = sentAt || null;
-        this.deliveredReport = deliveredReport || true;
+        this.deliveredReport = deliveredReport || false;
         this.delivered = delivered || false;
         this.deliveredAt = deliveredAt || null;
-        this.readReport = readReport || true;
+        this.readReport = readReport || false;
         this.read = read || false;
         this.readAt = readAt || null;
         this.autoOpen = false;
