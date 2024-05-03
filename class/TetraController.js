@@ -5,6 +5,7 @@ class TetraController {
     #serialPort = null
     #eventCallbacks = [];
     #sentMessages = []
+    #lastSentMessageTime = null
 
     /**
      * Creates an instance of TetraController.
@@ -49,7 +50,7 @@ class TetraController {
         this.#sentMessages.push(sdsData);
 
         var unsentMessages = this.#sentMessages.filter(m => m.sent == false && m.sentAt == null);
-        if(unsentMessages.length == 1) this.#sendMessages(this);
+        if(unsentMessages.length == 1 && ((new Date()).getTime() - this.#lastSentMessageTime) > 50) this.#sendMessages(this);
 
         return sdsData;
     }
@@ -64,7 +65,7 @@ class TetraController {
         this.#sentMessages.push(sdsMessage);
 
         var unsentMessages = this.#sentMessages.filter(m => m.sent == false && m.sentAt == null);
-        if(unsentMessages.length == 1) this.#sendMessages(this);
+        if(unsentMessages.length == 1 && ((new Date()).getTime() - this.#lastSentMessageTime) > 50) this.#sendMessages(this);
 
         this.#eventCallbacks.forEach(callback => {
             if(callback.event == 'sentMessageCreate'){
@@ -118,6 +119,7 @@ class TetraController {
 
             setTimeout(() => {
                 if(messageReceived == false) {
+                    const callbackIndex = self.#eventCallbacks.indexOf(eventCallback);
                     this.#eventCallbacks.splice(callbackIndex, 1);
                     res(false);
                 }
@@ -133,6 +135,8 @@ class TetraController {
     #sendMessages(self){
         var unsentMessages = self.#sentMessages.find(m => m.sent == false && m.sentAt == null);
         if(unsentMessages && self.sdsAvailable){
+            this.#lastSentMessageTime = (new Date()).getTime();
+
             const serialData = unsentMessages.toSerial(unsentMessages?.presenceCheck || false)
             const hexLength = serialData.length*4
             unsentMessages.sentAt = new Date();

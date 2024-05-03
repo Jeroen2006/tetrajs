@@ -5,7 +5,7 @@
   },
   "name": "TetraJS",
   "description": "This project aims to solve a very specific problem; being able to control & monitor your radios on a TETRA network.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
