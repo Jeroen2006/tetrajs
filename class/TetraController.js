@@ -98,16 +98,20 @@ class TetraController {
             if(unsentMessages.length == 1) this.#sendMessages(this);
 
             var messageReceived = false;
-            const callbackIndex = this.#eventCallbacks.push({
+
+            const self = this;
+            const eventCallback  ={
                 event: 'messageReceived',
                 callback: (message) => {
                     if(parseInt(message.sentBy) == issi){
-                        messageReceived = true;
+                        const callbackIndex = self.#eventCallbacks.indexOf(eventCallback);
                         this.#eventCallbacks.splice(callbackIndex, 1);
+                        messageReceived = true;
                         res(true);
                     }
                 }
-            });
+            };
+            this.#eventCallbacks.push(eventCallback);
 
             setTimeout(() => {
                 if(messageReceived == false) {
