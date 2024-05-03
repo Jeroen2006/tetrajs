@@ -48,11 +48,11 @@ setTimeout(() => {
     var msg = 'Dit is maar een testbericht';
     const config = { autoOpen: true, readReport: false, deliveredReport: false }
 
-    //const message1 = controller.sendMessage(msg, '9019110', config);
-    //const message2 = controller.sendMessage(msg, '9015080', config);
-    //const message3 = controller.sendMessage(msg, '9012113', config);
+    const message1 = controller.sendMessage(msg, '9019110', config);
+    const message2 = controller.sendMessage(msg, '9015080', config);
+    const message3 = controller.sendMessage(msg, '9012113', config);
     const message4 = controller.sendMessage(msg, '9018300', config);
-    //const message5 = controller.sendMessage(msg, '9012112', config);
+    const message5 = controller.sendMessage(msg, '9012112', config);
 }, 1000);
 
 controller.on('sendMessageReceived', (message) => {
@@ -69,10 +69,10 @@ controller.on('sendMessageRead', (message) => {
 //         const config = { autoOpen: true, readReport: false, deliveredReport: false }
     
 //         const message1 = controller.sendMessage('wie', '9019110', config);
-//         const message2 = controller.sendMessage('dit', '9015080', config);
-//         const message3 = controller.sendMessage('leest', '9012113', config);
-//         const message4 = controller.sendMessage('is', '9018300', config);
-//         const message5 = controller.sendMessage('gek', '9012112', config);
+//         // const message2 = controller.sendMessage('dit', '9015080', config);
+//         // const message3 = controller.sendMessage('leest', '9012113', config);
+//         // const message4 = controller.sendMessage('is', '9018300', config);
+//         // const message5 = controller.sendMessage('gek', '9012112', config);
 //     }, 1000);
 
 

@@ -94,6 +94,9 @@ class TetraController {
             sdsMessage.presenceCheck = true;
             this.#sentMessages.push(sdsMessage);
 
+            var unsentMessages = this.#sentMessages.filter(m => m.sent == false && m.sentAt == null);
+            if(unsentMessages.length == 1) this.#sendMessages(this);
+
             const callbackIndex = this.#eventCallbacks.push({
                 event: 'messageReceived',
                 callback: (message) => {
