@@ -1,4 +1,4 @@
-const { MotorolaSerialPort, SDSReceivedMessage, SDSSentMessage } = require('./export');
+const { MotorolaSerialPort, SDSReceivedMessage, SDSSentMessage, SDSData } = require('./export');
 const serialParser = require('../utils/serialParser');
 
 class TetraController {
@@ -22,6 +22,7 @@ class TetraController {
         this.operatingMode = null;
 
         this.#serialPort.on('open', () =>{
+            this.#serialPort.write('AT+CTSP=1,3,199\r\n') // 
             this.#serialPort.write('AT+CTSP=1,3,130\r\n') //Activate SDS pipe to PEI 
             this.#serialPort.write('AT+CTSP=1,3,131\r\n') //Activate GPS pipe to PEI
             this.#serialPort.write('AT+CTSP=1,3,10\r\n') //Register GPS LIP hanadling
@@ -39,6 +40,17 @@ class TetraController {
         }, 1000);
 
         var self = this;
+    }
+
+    sendData(data, recipient){
+        const messageId = this._getMessageId();
+
+        const sdsData = new SDSData(recipient, data, messageId);
+        this.#sentMessages.push(sdsData);
+
+        if(this.#sentMessages.length == 1) this.#sendMessages(this);
+
+        return sdsData;
     }
 
     sendMessage(message, recipient, options){
@@ -110,11 +122,21 @@ class TetraController {
             const serialData = unsentMessages.toSerial(unsentMessages?.presenceCheck || false)
             const hexLength = serialData.length*4
             unsentMessages.sentAt = new Date();
+            
             this.#serialPort.write(`AT+CMGS=${unsentMessages.sentTo},${hexLength}\r\n${serialData}\x1A`);
 
-            unsentMessages.sentPromise.then(() => {
+            if(unsentMessages.deliveredReport != true) unsentMessages.sentPromise.then(() => {
                 self.#sendMessages(self);
             });
+            if(unsentMessages.deliveredReport == true) {
+                var autoSendTimeout = setTimeout(() => {
+                    self.#sendMessages(self);
+                }, 5000);
+                unsentMessages.deliveredPromise.then(() => {
+                    self.#sendMessages(self);
+                    clearTimeout(autoSendTimeout);
+                });
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 const TetraController = require('./class/TetraController');
 
 const controller = new TetraController({
-    serialPort: 'COM7'
+    serialPort: 'COM7',
 });
 
 controller.on('messageReceived', (message) => {
@@ -10,6 +10,8 @@ controller.on('messageReceived', (message) => {
     console.log(message);
 });
 
+//9029999
+//controller.setIssi(2045464);
 //controller.setIssi(9029999);
 //controller.dmo();
 
@@ -41,11 +43,14 @@ controller.on('status', (message) => {
 //     console.log(`9018300: ${response}`);
 // });
 
-const message1 = controller.sendMessage('Kom ETEN', '9019110', { autoOpen: true, readReport: false, deliveredReport: false });
-const message3 = controller.sendMessage('Kom ETEN', '9018300', { autoOpen: true, readReport: false, deliveredReport: false });
-const message2 = controller.sendMessage('Kom ETEN', '9012112', { autoOpen: true, readReport: false, deliveredReport: false });
-const message4 = controller.sendMessage('Kom ETEN', '9012113', { autoOpen: true, readReport: false, deliveredReport: false });
-const message5 = controller.sendMessage('Kom ETEN', '9015080', { autoOpen: true, readReport: false, deliveredReport: false });
+//const message1 = controller.sendMessage('Kom ETEN', '9019110', { autoOpen: true, readReport: false, deliveredReport: true });
+setTimeout(() => {
+    const message1 = controller.sendMessage('TEST', '9015080', { autoOpen: true, readReport: false, deliveredReport: true });
+}, 1000);
+// const message3 = controller.sendMessage('Kom ETEN', '9018300', { autoOpen: true, readReport: false, deliveredReport: true });
+// const message2 = controller.sendMessage('Kom ETEN', '9012112', { autoOpen: true, readReport: false, deliveredReport: true });
+// const message4 = controller.sendMessage('Kom ETEN', '9012113', { autoOpen: true, readReport: false, deliveredReport: true });
+// const message5 = controller.sendMessage('Kom ETEN', '9015080', { autoOpen: true, readReport: false, deliveredReport: true });
 
 // message1.sentPromise.then(() => {
 //     const message2 = controller.sendMessage('Kom ETEN', '9019110', { autoOpen: true, readReport: false,  deliveredReport: false});

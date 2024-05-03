@@ -13,8 +13,6 @@ function serialParser(data, serialPort) {
     var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM', '+CCLK'];
     var twoLineCommands = ['+CTSDSR'];
 
-    //console.log(data);
-
     var unkownCommand = true;
 
     if(twoLineCommand != null){
