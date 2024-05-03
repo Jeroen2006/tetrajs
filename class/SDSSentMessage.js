@@ -2,7 +2,7 @@ const Byte = require('./Byte.js');
 
 class SDSSentMessage {
     constructor(sentTo, messageBody, messageId, createdAt, sent, sentAt, deliveredReport, delivered, deliveredAt, readReport, read, readAt) {
-        this.sentTo = sentTo;
+        this.sentTo = parseInt(sentTo);
         this.body = messageBody;
         this.messageId = messageId;
         this.createdAt = createdAt || new Date();
@@ -14,6 +14,7 @@ class SDSSentMessage {
         this.readReport = readReport || true;
         this.read = read || false;
         this.readAt = readAt || null;
+        this.autoOpen = false;
 
         this.sentPromise = new Promise((resolve, reject) => this.sentResolve = resolve);
         this.deliveredPromise = new Promise((resolve, reject) => this.deliveredResolve = resolve);
@@ -26,6 +27,7 @@ class SDSSentMessage {
      */
     toSerial(presCheck = false){
         var reportByte = new Byte(0);
+        
         if(this.deliveredReport || this.readReport) reportByte.setBit(2, true);
         if(this.deliveredReport) reportByte.setBit(2, true);
         if(this.readReport) reportByte.setBit(3, true);
@@ -33,11 +35,11 @@ class SDSSentMessage {
         var hexMessage = Buffer.from(this.body, 'utf8').toString('hex') //body
         if(presCheck == false) hexMessage = '01' + hexMessage //Validity Period
         if(presCheck == true) hexMessage = 'A0' + hexMessage //Validity Period
-
         hexMessage = intToHex(this.messageId) + hexMessage //Message Reference
         hexMessage = reportByte.hex + hexMessage //Message Type 
-        hexMessage = '82' + hexMessage //Protocol Identifier
-
+        
+        hexMessage = (this.autoOpen == true ? '89' : '82') + hexMessage //Protocol Identifier //82,89
+ 
         return hexMessage.toUpperCase();
     }
 

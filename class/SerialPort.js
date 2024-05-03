@@ -38,11 +38,11 @@ class MotorolaSerialPort {
 
         this._serialport.on('error', (error) => {
             console.log('error', error)
-            if (this.#reconnect) {
-                setTimeout(() => {
-                    this._serialport.open()
-                }, 1000)
-            }
+            // if (this.#reconnect) {
+            //     setTimeout(() => {
+            //         this._serialport.open()
+            //     }, 1000)
+            // }
 
             this.#listeners.forEach(listener => {
                 if (listener.event === 'error') {

@@ -1,7 +1,7 @@
 const TetraController = require('./class/TetraController');
 
 const controller = new TetraController({
-    serialPort: 'COM11'
+    serialPort: 'COM7'
 });
 
 controller.on('messageReceived', (message) => {
@@ -10,8 +10,8 @@ controller.on('messageReceived', (message) => {
     console.log(message);
 });
 
-controller.setIssi(9029999);
-controller.tmo();
+//controller.setIssi(9029999);
+//controller.dmo();
 
 controller.on('gps', (message) => {
     console.log(message);
@@ -21,13 +21,13 @@ controller.on('status', (message) => {
     console.log(message);
 });
 
-controller.on('time', (time) => {
-    console.log(time);
-});
+// controller.on('time', (time) => {
+//     console.log(time);
+// });
 
-// // controller.presenceCheck(9015080).then((response) => {
-// //     console.log(`9015080: ${response}`);
-// // });
+// controller.presenceCheck(9015080).then((response) => {
+//     console.log(`9015080: ${response}`);
+// });
 // // controller.presenceCheck(9019110).then((response) => {
 // //     console.log(`9019110: ${response}`);
 // // });
@@ -41,21 +41,23 @@ controller.on('time', (time) => {
 //     console.log(`9018300: ${response}`);
 // });
 
-// const message = controller.sendMessage('hry', '9018300');
+const message = controller.sendMessage('Kom ETEN', '9019110', {
+    autoOpen: false,
+});
 
-// message.sentPromise.then(() => {
-//     console.log('Message sent');
-//     console.log(message)
-// });
+message.sentPromise.then(() => {
+    console.log('Message sent');
+    console.log(message)
+});
 
-// message.deliveredPromise.then(() => {
-//     console.log('Message delivered');
-//     console.log(message)
-// });
+message.deliveredPromise.then(() => {
+    console.log('Message delivered');
+    console.log(message)
+});
 
-// message.readPromise.then(() => {
-//     console.log('Message read');
-//     console.log(message)
-// });
+message.readPromise.then(() => {
+    console.log('Message read');
+    console.log(message)
+});
 // controller.sendMessage('Hello, World!', '9012113')
 // controller.sendMessage('Hello, World!', '9012113')

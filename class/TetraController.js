@@ -48,6 +48,7 @@ class TetraController {
 
         const messageId = this._getMessageId();
         const sdsMessage = new SDSSentMessage(recipient, message, messageId, new Date(), false, null, options?.deliveredReport || true, false, null, options?.readReport || true);
+        sdsMessage.autoOpen = options?.autoOpen || false;
         this.#sentMessages.push(sdsMessage);
 
         this.#eventCallbacks.forEach(callback => {
