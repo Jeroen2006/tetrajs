@@ -97,10 +97,12 @@ class TetraController {
             var unsentMessages = this.#sentMessages.filter(m => m.sent == false && m.sentAt == null);
             if(unsentMessages.length == 1) this.#sendMessages(this);
 
+            var messageReceived = false;
             const callbackIndex = this.#eventCallbacks.push({
                 event: 'messageReceived',
                 callback: (message) => {
                     if(parseInt(message.sentBy) == issi){
+                        messageReceived = true;
                         this.#eventCallbacks.splice(callbackIndex, 1);
                         res(true);
                     }
@@ -108,8 +110,10 @@ class TetraController {
             });
 
             setTimeout(() => {
-                this.#eventCallbacks.splice(callbackIndex, 1);
-                res(false);
+                if(messageReceived == false) {
+                    this.#eventCallbacks.splice(callbackIndex, 1);
+                    res(false);
+                }
             }, timeout);
 
         })
