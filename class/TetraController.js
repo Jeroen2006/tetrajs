@@ -48,7 +48,8 @@ class TetraController {
         const sdsData = new SDSData(recipient, data, messageId);
         this.#sentMessages.push(sdsData);
 
-        if(this.#sentMessages.length == 1) this.#sendMessages(this);
+        var unsentMessages = this.#sentMessages.filter(m => m.sent == false && m.sentAt == null);
+        if(unsentMessages.length == 1) this.#sendMessages(this);
 
         return sdsData;
     }
@@ -61,7 +62,9 @@ class TetraController {
         const sdsMessage = new SDSSentMessage(recipient, message, messageId, new Date(), false, null, options?.deliveredReport, false, null, options?.readReport);
         sdsMessage.autoOpen = options?.autoOpen || false;
         this.#sentMessages.push(sdsMessage);
-        if(this.#sentMessages.length == 1) this.#sendMessages(this);
+
+        var unsentMessages = this.#sentMessages.filter(m => m.sent == false && m.sentAt == null);
+        if(unsentMessages.length == 1) this.#sendMessages(this);
 
         this.#eventCallbacks.forEach(callback => {
             if(callback.event == 'sentMessageCreate'){
