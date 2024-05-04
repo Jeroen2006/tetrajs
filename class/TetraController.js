@@ -62,6 +62,7 @@ class TetraController {
         const messageId = this._getMessageId();
         const sdsMessage = new SDSSentMessage(recipient, message, messageId, new Date(), false, null, options?.deliveredReport, false, null, options?.readReport);
         sdsMessage.autoOpen = options?.autoOpen || false;
+        sdsMessage.id = options?.id || null;
         this.#sentMessages.push(sdsMessage);
 
         var unsentMessages = this.#sentMessages.filter(m => m.sent == false && m.sentAt == null);
