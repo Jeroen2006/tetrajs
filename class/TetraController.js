@@ -36,11 +36,11 @@ class TetraController {
         });
 
         setInterval(() => {
-            this.#serialPort.write('AT+CNUM?\r\n');
             this.#serialPort.write('AT+CSQ?\r\n');
+            this.#serialPort.write('AT+CNUM?\r\n');
             this.#serialPort.write('AT+CTBCT?\r\n');
             this.#serialPort.write('AT+CCLK?\r\n');
-        }, 2000);
+        }, 1000);
 
         var self = this;
     }
