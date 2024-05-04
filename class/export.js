@@ -1,7 +1,7 @@
-const MotorolaSerialPort = require('./SerialPort');
-const SDSReceivedMessage = require('./SDSReceivedMessage');
-const SDSSentMessage = require('./SDSSentMessage');
-const SDSData = require('./SDSData');
+const MotorolaSerialPort = require('./SerialPort.js');
+const SDSReceivedMessage = require('./SDSReceivedMessage.js');
+const SDSSentMessage = require('./SDSSentMessage.js');
+const SDSData = require('./SDSData.js');
 
 module.exports = {
     MotorolaSerialPort,

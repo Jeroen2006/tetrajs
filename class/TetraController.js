@@ -1,5 +1,5 @@
-const { MotorolaSerialPort, SDSReceivedMessage, SDSSentMessage, SDSData } = require('./export');
-const serialParser = require('../utils/serialParser');
+const { MotorolaSerialPort, SDSReceivedMessage, SDSSentMessage, SDSData } = require('./export.js');
+const serialParser = require('../utils/serialParser.js');
 
 class TetraController {
     #serialPort = null

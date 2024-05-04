@@ -1,5 +1,5 @@
-const Byte = require('../class/Byte');
-const SDSReceivedMessage = require('../class/SDSReceivedMessage');
+const Byte = require('../class/Byte.js');
+const SDSReceivedMessage = require('../class/SDSReceivedMessage.js');
 const { convertBinaryToLongitude, convertBinaryToLatitude, convertBinaryPositionErrorToString, convertDirectionBitsToString, convertHorizontalSpeedBitsToInteger }  = require('./gpsConvert.js')
 
 var twoLineCommand = null;
