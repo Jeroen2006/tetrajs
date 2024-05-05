@@ -38,6 +38,7 @@ class TetraController {
         setInterval(() => {
             this.#serialPort.write('AT+CSQ?\r\n');
             this.#serialPort.write('AT+CCLK?\r\n');
+            this.#serialPort.write('AT+CTICN?\r\n');
         }, 1000);
 
         setInterval(() => {
