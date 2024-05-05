@@ -61,6 +61,7 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
             return { type: 'operatingMode', mode: value };
             break;
         case '+CTBCT':
+            console.log(value);
             state = new Byte(value.split(",")[1]);
             const sdsAvailable = state.getBit(6);
             return { sdsAvailable };
