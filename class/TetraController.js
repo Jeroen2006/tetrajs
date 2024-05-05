@@ -100,7 +100,10 @@ class TetraController {
     presenceCheck(issi, timeout = 10000){
         return new Promise(res=>{
             const messageId = this._getMessageId();
-            const sdsMessage = new SDSSentMessage(issi, 'PRESCHECK', messageId, new Date(), false, null, true, true, null, false);
+            const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            const randomString = Array(10).fill().map(() => randomChars[Math.floor(Math.random() * randomChars.length)]).join('');
+
+            const sdsMessage = new SDSSentMessage(issi, randomString, messageId, new Date(), false, null, true, true, null, false);
             sdsMessage.presenceCheck = true;
             this.#sentMessages.push(sdsMessage);
 
