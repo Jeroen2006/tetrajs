@@ -38,7 +38,7 @@ class TetraController {
         setInterval(() => {
             this.#serialPort.write('AT+CSQ?\r\n');
             this.#serialPort.write('AT+CCLK?\r\n');
-            this.#serialPort.write('AT+CTICN?\r\n');
+            this.#serialPort.write('AT+CTOCP?\r\n');
         }, 1000);
 
         setInterval(() => {
@@ -176,7 +176,7 @@ class TetraController {
         if(serialData?.networkCode) this.networkCode = serialData.networkCode;
         if(serialData?.subscriberNumber) this.subscriberNumber = serialData.subscriberNumber;
         if(serialData?.signalStrength) this.signalStrength = serialData.signalStrength;
-        if(serialData?.sdsAvailable) this.sdsAvailable = serialData.sdsAvailable;
+        if(serialData?.sdsAvailable != null) this.sdsAvailable = serialData.sdsAvailable;
 
         //log type of message
         if(serialData instanceof SDSReceivedMessage){

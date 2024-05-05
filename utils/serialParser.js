@@ -10,7 +10,7 @@ function serialParser(data, serialPort) {
         return;
     }
 
-    var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM', '+CCLK', '+CTICN'];
+    var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM', '+CCLK', '+CTOCP'];
     var twoLineCommands = ['+CTSDSR'];
 
     var unkownCommand = true;
@@ -45,7 +45,7 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
     const {command, value} = extractCommand(lineOne);
 
     switch(command){
-        case '+CTICN':
+        case '+CTOCP':
             console.log(value);
             break;
         case '+CCLK':
@@ -68,8 +68,6 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
 
             const voiceAvailable = state.getBit(5);
             const sdsAvailable = state.getBit(6);
-
-            console.log(`Voice available: ${voiceAvailable}, SDS available: ${sdsAvailable}`);
 
             return { sdsAvailable, voiceAvailable };
             break;
