@@ -165,6 +165,10 @@ class TetraController {
                     clearTimeout(autoSendTimeout);
                 });
             }
+        } else if(!self.sdsAvailable){
+            setTimeout(() => {
+                self.#sendMessages(self);
+            }, 1000);
         }
     }
 
