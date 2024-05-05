@@ -163,9 +163,8 @@ function handleDataMessage(value, lineTwo, serialPort){
         if(sendReceived) serialPort.write(`AT+CMGS=${callingParty},32\r\n821000${messageReference}\x1A`);
         if(sendRead) setTimeout(() => { serialPort.write(`AT+CMGS=${callingParty},32\r\n821002${messageReference}\x1A`); }, 4000);
 
-        console.log(protocolIdentifier)
         if(protocolIdentifier == 'C9'){
-            console.log(messageReference, lineTwo)
+            console.log(callingParty, messageReference, lineTwo)
         }
 
         return new SDSReceivedMessage(callingParty, calledParty, message, receivedAt, sendReceived, sendRead);
