@@ -66,6 +66,8 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
             const voiceAvailable = state.getBit(4);
             const sdsAvailable = state.getBit(5);
 
+            console.log(`Voice available: ${voiceAvailable}, SDS available: ${sdsAvailable}`);
+
             return { sdsAvailable, voiceAvailable };
             break;
         case '+CSQ':
