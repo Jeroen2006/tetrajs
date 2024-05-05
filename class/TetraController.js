@@ -213,12 +213,15 @@ class TetraController {
                     this.operatingMode = 'TMO';
                     break;
                 case '1':
+                    this.sdsAvailable = true;
                     this.operatingMode = 'DMO';
                     break;
                 case '6,0':
+                    this.sdsAvailable = false;
                     this.operatingMode = 'DMO REPEATER';
                     break;
                 case '5,3':
+                    this.sdsAvailable = false;
                     this.operatingMode = 'GATEWAY';
                     break;
             }
