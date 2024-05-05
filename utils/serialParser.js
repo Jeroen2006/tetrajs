@@ -63,8 +63,8 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
         case '+CTBCT':
             state = new Byte(value.split(",")[1]);
 
-            const voiceAvailable = state.getBit(3);
-            const sdsAvailable = state.getBit(4);
+            const voiceAvailable = state.getBit(5);
+            const sdsAvailable = state.getBit(6);
 
             console.log(`Voice available: ${voiceAvailable}, SDS available: ${sdsAvailable}`);
 
