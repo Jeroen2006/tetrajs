@@ -10,7 +10,7 @@ function serialParser(data, serialPort) {
         return;
     }
 
-    var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM', '+CCLK'];
+    var oneLineCommands = ['+CMGS', '+CTBCT', '+CSQ', '+CNUM', '+CTOM', '+CCLK', '+CTICN'];
     var twoLineCommands = ['+CTSDSR'];
 
     var unkownCommand = true;
@@ -45,6 +45,9 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
     const {command, value} = extractCommand(lineOne);
 
     switch(command){
+        case '+CTICN':
+            console.log(value);
+            break;
         case '+CCLK':
             var [date, time] = value.split(",");
             var [year, month, day] = date.split("/");
