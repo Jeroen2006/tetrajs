@@ -61,10 +61,12 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
             return { type: 'operatingMode', mode: value };
             break;
         case '+CTBCT':
-            console.log(value);
             state = new Byte(value.split(",")[1]);
-            const sdsAvailable = state.getBit(6);
-            return { sdsAvailable };
+
+            const voiceAvailable = state.getBit(4);
+            const sdsAvailable = state.getBit(5);
+
+            return { sdsAvailable, voiceAvailable };
             break;
         case '+CSQ':
             var signalStrengthOffset = parseInt(value.split(",")[0]);
