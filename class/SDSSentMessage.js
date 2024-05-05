@@ -38,7 +38,8 @@ class SDSSentMessage {
         hexMessage = intToHex(this.messageId) + hexMessage //Message Reference
         hexMessage = reportByte.hex + hexMessage //Message Type 
         
-        hexMessage = (this.autoOpen == true ? '89' : '82') + hexMessage //Protocol Identifier //82,89
+        if(presCheck == false) hexMessage = (this.autoOpen == true ? '89' : '82') + hexMessage //Protocol Identifier //82,89
+        if(presCheck == true) hexMessage = 'C9' + hexMessage //Protocol Identifier //82,89
  
         return hexMessage.toUpperCase();
     }

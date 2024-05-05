@@ -83,6 +83,8 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
             var [service] = value.split(",");
             const isGpsMessage = lineTwo.substring(0, 2) == "0A";
 
+            console.log(value, lineTwo)
+
             if(service == '12' && !isGpsMessage) return handleDataMessage(value, lineTwo, serialPort);
             if(service == '12' && isGpsMessage) return handleGpsMessage(value, lineTwo, serialPort);
             if(service == '13') return handleStatusMessage(value, lineTwo, serialPort);
@@ -155,6 +157,7 @@ function handleDataMessage(value, lineTwo, serialPort){
         const message = Buffer.from(lineTwo.substring(8), 'hex').toString('utf8');
         const messageReference = lineTwo.substring(4, 6);
         const reportType = new Byte(lineTwo.substring(2, 4));
+
         const sendReceived = reportType.getBit(2);
         const sendRead = reportType.getBit(3);
 
