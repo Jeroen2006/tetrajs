@@ -293,14 +293,21 @@ class TetraController {
         }
     
         if(id == 0) {
-            var messagesWithTetrareference = this.#sentMessages.map(m => m.messageId);
-    
-            //set tetraReference to 0 on oldest message 
-            var oldestMessage = his.#sentMessages.find(m => m.messageId == Math.min(...messagesWithTetrareference));
+            //filter messages where messageId is not 0
+            this.#sentMessages = this.#sentMessages.filter(m => m.messageId != 0);
+
+            //sort messages by time created
+            this.#sentMessages.sort((a, b) => a.createdAt - b.createdAt);
+
+            //get oldest message
+            const oldestMessage = this.#sentMessages[0];
+
+            //set id to oldest message id to zero
+            const messageId = oldestMessage.messageId;
             oldestMessage.messageId = 0;
-    
-            //try again
-            return this._getMessageId();
+
+            //return id
+            return messageId;
         }
     
         return id;
