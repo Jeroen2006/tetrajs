@@ -1,7 +1,7 @@
 const TetraController = require('./class/TetraController');
 
 const controller = new TetraController({
-    serialPort: 'COM7',
+    serialPort: 'COM29',
 });
 
 controller.on('messageReceived', (message) => {
@@ -13,7 +13,7 @@ controller.on('messageReceived', (message) => {
 //9029999
 //controller.setIssi(2045464);
 //controller.setIssi(9029999);
-//controller.dmo();
+//controller.tmo();
 
 controller.on('gps', (message) => {
     console.log(message);
@@ -23,9 +23,11 @@ controller.on('status', (message) => {
     console.log(message);
 });
 
-// controller.on('time', (time) => {
-//     console.log(time);
-// });
+// controller.sendData('Hello, World!', '9029999');
+
+controller.on('time', (time) => {
+    console.log(time);
+});
 
 // controller.presenceCheck(9015080).then((response) => {
 //     console.log(`9015080: ${response}`);
@@ -44,24 +46,33 @@ controller.on('status', (message) => {
 // });
 
 
-setTimeout(() => {
-    var msg = 'Dit is maar een testbericht';
-    const config = { autoOpen: true, readReport: false, deliveredReport: false }
 
-    const message1 = controller.sendMessage(msg, '9019110', config);
-    const message2 = controller.sendMessage(msg, '9015080', config);
-    const message3 = controller.sendMessage(msg, '9012113', config);
-    const message4 = controller.sendMessage(msg, '9018300', config);
-    const message5 = controller.sendMessage(msg, '9012112', config);
-}, 1000);
+var hexMessage = Buffer.from('AT', 'utf8').toString('hex') //body
+hexMessage = '01' + hexMessage //Validity Period
+hexMessage = '01' + hexMessage //Message Reference
+hexMessage = '02' + hexMessage //Message Type 
+hexMessage = 'E0' + hexMessage //Protocol Identifier //82,89
+controller._sendRawMessage(9015080, hexMessage)
 
-controller.on('sendMessageReceived', (message) => {
-    console.log(`Message received by ${message.sentTo}`);
-});
 
-controller.on('sendMessageRead', (message) => {
-    onsole.log(`Message read by ${message.sentTo}`);
-});
+// setTimeout(() => {
+//     var msg = 'Dit is maar een testbericht';
+//     const config = { autoOpen: true, readReport: false, deliveredReport: false }
+
+//     const message1 = controller.sendMessage(msg, '9019110', config);
+//     const message2 = controller.sendMessage(msg, '9015080', config);
+//     const message3 = controller.sendMessage(msg, '9012113', config);
+//     const message4 = controller.sendMessage(msg, '9018300', config);
+//     const message5 = controller.sendMessage(msg, '9012112', config);
+// }, 1000);
+
+// controller.on('sendMessageReceived', (message) => {
+//     console.log(`Message received by ${message.sentTo}`);
+// });
+
+// controller.on('sendMessageRead', (message) => {
+//     onsole.log(`Message read by ${message.sentTo}`);
+// });
 
 
 
@@ -94,5 +105,5 @@ controller.on('sendMessageRead', (message) => {
 //     console.log('Message read');
 //     console.log(message)
 // });
-// controller.sendMessage('Hello, World!', '9012113')
+controller.sendMessage('Hello, World!', '9019110')
 // controller.sendMessage('Hello, World!', '9012113')

@@ -46,7 +46,6 @@ function handleCommand(lineOne, lineTwo = null, serialPort){
 
     switch(command){
         case '+CTOCP':
-            console.log(value);
             break;
         case '+CCLK':
             var [date, time] = value.split(",");
