@@ -114,7 +114,8 @@ class TetraController {
             var messageReceived = false;
 
             const self = this;
-            const eventCallback  ={
+            var createdTimeout = false;
+            const eventCallback1  ={
                 event: 'messageReceived',
                 callback: (message) => {
                     if(parseInt(message.sentBy) == issi){
@@ -125,15 +126,34 @@ class TetraController {
                     }
                 }
             };
-            this.#eventCallbacks.push(eventCallback);
+            const eventCallback2  ={
+                event: 'sendMessageSent',
+                callback: (message) => {
+                    if(parseInt(message.sentTo) == issi){
+                        if(createdTimeout == false){
+                            createdTimeout = true;
+                            setTimeout(() => {
+                                if(messageReceived == false) {
+                                    const callbackIndex = self.#eventCallbacks.indexOf(eventCallback);
+                                    this.#eventCallbacks.splice(callbackIndex, 1);
+                                    res(false);
+                                }
+                            }, timeout);
+                        }
+                    }
+                }
+            };
+            this.#eventCallbacks.push(eventCallback1);
+            this.#eventCallbacks.push(eventCallback2);
 
+            //default timeout after 100 seconds
             setTimeout(() => {
                 if(messageReceived == false) {
                     const callbackIndex = self.#eventCallbacks.indexOf(eventCallback);
                     this.#eventCallbacks.splice(callbackIndex, 1);
                     res(false);
                 }
-            }, timeout);
+            }, 100000);
 
         })
     }
