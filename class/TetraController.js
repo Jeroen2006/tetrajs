@@ -138,9 +138,9 @@ class TetraController {
                             console.log('created timeout');
                             createdTimeout = true;
                             setTimeout(() => {
-                                console.log('timeout', message);
                                 if(messageReceived == false) {
-
+                                    console.log('timeout');
+                                    
                                     var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
                                     this.#eventCallbacks.splice(callbackIndex, 1);
                                     var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
