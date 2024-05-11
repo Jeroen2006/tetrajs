@@ -119,7 +119,7 @@ class TetraController {
                 event: 'messageReceived',
                 callback: (message) => {
                     if(parseInt(message.sentBy) == issi){
-                        const callbackIndex = self.#eventCallbacks.indexOf(eventCallback);
+                        const callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
                         this.#eventCallbacks.splice(callbackIndex, 1);
                         messageReceived = true;
                         res(true);
@@ -138,8 +138,10 @@ class TetraController {
                             setTimeout(() => {
                                 console.log('timeout', message);
                                 if(messageReceived == false) {
-                                    const callbackIndex = self.#eventCallbacks.indexOf(eventCallback);
+
+                                    const callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
                                     this.#eventCallbacks.splice(callbackIndex, 1);
+
                                     res(false);
                                 }
                             }, timeout);
