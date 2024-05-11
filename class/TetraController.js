@@ -129,10 +129,14 @@ class TetraController {
             const eventCallback2  ={
                 event: 'sendMessageSent',
                 callback: (message) => {
+                    console.log(message);
                     if(parseInt(message.sentTo) == issi){
+                        console.log('sent to', message.sentTo);
                         if(createdTimeout == false){
+                            console.log('created timeout');
                             createdTimeout = true;
                             setTimeout(() => {
+                                console.log('timeout', message);
                                 if(messageReceived == false) {
                                     const callbackIndex = self.#eventCallbacks.indexOf(eventCallback);
                                     this.#eventCallbacks.splice(callbackIndex, 1);
