@@ -119,8 +119,11 @@ class TetraController {
                 event: 'messageReceived',
                 callback: (message) => {
                     if(parseInt(message.sentBy) == issi){
-                        const callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
+                        var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
                         this.#eventCallbacks.splice(callbackIndex, 1);
+                        var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
+                        this.#eventCallbacks.splice(callbackIndex, 1);
+
                         messageReceived = true;
                         res(true);
                     }
@@ -129,7 +132,6 @@ class TetraController {
             const eventCallback2  ={
                 event: 'sendMessageSent',
                 callback: (message) => {
-                    console.log(message);
                     if(parseInt(message.sentTo) == issi){
                         console.log('sent to', message.sentTo);
                         if(createdTimeout == false){
@@ -139,7 +141,9 @@ class TetraController {
                                 console.log('timeout', message);
                                 if(messageReceived == false) {
 
-                                    const callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
+                                    var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
+                                    this.#eventCallbacks.splice(callbackIndex, 1);
+                                    var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
                                     this.#eventCallbacks.splice(callbackIndex, 1);
 
                                     res(false);
@@ -155,7 +159,9 @@ class TetraController {
             //default timeout after 100 seconds
             setTimeout(() => {
                 if(messageReceived == false) {
-                    const callbackIndex = self.#eventCallbacks.indexOf(eventCallback);
+                    var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
+                    this.#eventCallbacks.splice(callbackIndex, 1);
+                    var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
                     this.#eventCallbacks.splice(callbackIndex, 1);
                     res(false);
                 }
