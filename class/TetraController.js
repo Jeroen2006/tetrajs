@@ -119,10 +119,10 @@ class TetraController {
                 event: 'messageReceived',
                 callback: (message) => {
                     if(parseInt(message.sentBy) == issi){
-                        var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
-                        this.#eventCallbacks.splice(callbackIndex, 1);
-                        var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
-                        this.#eventCallbacks.splice(callbackIndex, 1);
+                        // var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
+                        // this.#eventCallbacks.splice(callbackIndex, 1);
+                        // var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
+                        // this.#eventCallbacks.splice(callbackIndex, 1);
 
                         messageReceived = true;
                         res(true);
@@ -133,18 +133,14 @@ class TetraController {
                 event: 'sendMessageSent',
                 callback: (message) => {
                     if(parseInt(message.sentTo) == issi){
-                        console.log('sent to', message.sentTo);
                         if(createdTimeout == false){
-                            console.log('created timeout');
                             createdTimeout = true;
                             setTimeout(() => {
                                 if(messageReceived == false) {
-                                    console.log('timeout');
-                                    
-                                    var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
-                                    this.#eventCallbacks.splice(callbackIndex, 1);
-                                    var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
-                                    this.#eventCallbacks.splice(callbackIndex, 1);
+                                    // var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
+                                    // this.#eventCallbacks.splice(callbackIndex, 1);
+                                    // var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
+                                    // this.#eventCallbacks.splice(callbackIndex, 1);
 
                                     res(false);
                                 }
@@ -159,10 +155,10 @@ class TetraController {
             //default timeout after 100 seconds
             setTimeout(() => {
                 if(messageReceived == false) {
-                    var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
-                    this.#eventCallbacks.splice(callbackIndex, 1);
-                    var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
-                    this.#eventCallbacks.splice(callbackIndex, 1);
+                    // var callbackIndex = self.#eventCallbacks.indexOf(eventCallback1);
+                    // this.#eventCallbacks.splice(callbackIndex, 1);
+                    // var callbackIndex = self.#eventCallbacks.indexOf(eventCallback2);
+                    // this.#eventCallbacks.splice(callbackIndex, 1);
                     res(false);
                 }
             }, 100000);
