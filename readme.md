@@ -8,15 +8,11 @@ With this library you can send and receive various kinds of data from other radi
  - GPS LIP Location reports
  - Status Messages
 
- 
-
 # Tested Hardware
 The library should work with every Motorola TETRA radio that has a PEI interface (and all features on the interface are enabled). But just to be sure, it has been tested on the following models (and they work ofcourse):
 
 - MTM5400 (TMO & DMO)
 - MTP6550 (TMO & DMO)
-- MTP850s (TMO & DMO)
-- MTP850 (TMO & DMO) 
 
 # API (Incomplete)
     controller.dmo();
