@@ -3,21 +3,21 @@
     "express": "^4.19.2",
     "serialport": "^12.0.0"
   },
-  "name": "TetraJS",
+  "name": "tetrajs",
   "description": "This project aims to solve a very specific problem; being able to control & monitor your radios on a TETRA network.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jeroen2006/TetraJS.git"
+    "url": "git+https://github.com/Jeroen2006/tetrajs.git"
   },
   "author": "Jeroen de Kuijper",
   "license": "CC BY-NC-ND 4.0",
   "bugs": {
-    "url": "https://github.com/Jeroen2006/TetraJS/issues"
+    "url": "https://github.com/Jeroen2006/tetrajs/issues"
   },
-  "homepage": "https://github.com/Jeroen2006/TetraJS#readme"
+  "homepage": "https://github.com/Jeroen2006/tetrajs#readme"
 }

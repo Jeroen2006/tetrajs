@@ -26,19 +26,36 @@ const radio = new TetraJS('COM6', 460800);
 //     enableBacklog: false,
 // })
 
-// radio.enableGpsReporting({
-//     issi: 15432342,
-//     enableReporting: false,
-// })
-
-radio.requestImmediateLocationReport({
+var gpsReporting = radio.enableGpsReporting({
     issi: 15432342,
-    shortReport: true
-});
+    enableReporting: false,
+})
+
+gpsReporting.on('sendPrepared', (message)=>{
+    console.log('GPS Reporting sent: ', message)
+
+})
+
+// radio.sendMessage({
+//     issi: 15432342,
+//     body: 'Hello World!',
+//     instantMessage: false,
+//     deliveryReport: true,
+//     consumedReport: false
+// });
+
+// radio.requestImmediateLocationReport({
+//     issi: 15432342,
+//     shortReport: true
+// });
 
 radio.requestImmediateLocationReport({
     issi: 12543343,
     shortReport: true
+});
+
+radio.on('gps', function (message) {
+    console.log('GPS received: ', message);
 });
 
 
@@ -48,13 +65,7 @@ radio.requestImmediateLocationReport({
 // });
 
 //SEND MESSAGE
-// var message = radio.sendMessage({
-//     issi: 15432342,
-//     body: 'Hello World!',
-//     instantMessage: false,
-//     deliveryReport: true,
-//     consumedReport: false
-// });
+// 
 
 // message.on('sent', function () {
 //     console.log('Message sent!');
@@ -71,8 +82,3 @@ radio.requestImmediateLocationReport({
 radio.on('received-message', function (message) {
     console.log('Message received: ', message);
 });
-
-radio.on('gps', function (message) {
-    console.log('GPS received: ', message);
-});
-
