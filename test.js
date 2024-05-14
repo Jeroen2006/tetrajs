@@ -26,15 +26,15 @@ const radio = new TetraJS('COM6', 460800);
 //     enableBacklog: false,
 // })
 
-var gpsReporting = radio.enableGpsReporting({
-    issi: 15432342,
-    enableReporting: false,
-})
+// var gpsReporting = radio.enableGpsReporting({
+//     issi: 15432342,
+//     enableReporting: false,
+// })
 
-gpsReporting.on('sendPrepared', (message)=>{
-    console.log('GPS Reporting sent: ', message)
+// gpsReporting.on('sendPrepared', (message)=>{
+//     console.log('GPS Reporting sent: ', message)
 
-})
+// })
 
 // radio.sendMessage({
 //     issi: 15432342,
@@ -44,10 +44,10 @@ gpsReporting.on('sendPrepared', (message)=>{
 //     consumedReport: false
 // });
 
-// radio.requestImmediateLocationReport({
-//     issi: 15432342,
-//     shortReport: true
-// });
+radio.requestImmediateLocationReport({
+    issi: 15432342,
+    shortReport: true
+});
 
 radio.requestImmediateLocationReport({
     issi: 12543343,
