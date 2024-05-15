@@ -1,5 +1,5 @@
 const TetraJS = require('./index');
-const radio = new TetraJS('COM6', 460800);
+const radio = new TetraJS('COM7', 460800);
 
 // setInterval(() => {
 //     console.log(radio)
@@ -26,15 +26,14 @@ const radio = new TetraJS('COM6', 460800);
 //     enableBacklog: false,
 // })
 
-
 // radio.enableGpsReporting({
-//     issi: 9018300,
-//     enableReporting: false,
+//     issi: 15432342,
+//     enableReporting: true,
 //     enableBacklog: false,
 // })
 
 // var gpsReporting = radio.enableGpsReporting({
-//     issi: 15432342,
+//     issi: 9012112,
 //     enableReporting: false,
 // })
 
@@ -44,17 +43,17 @@ const radio = new TetraJS('COM6', 460800);
 // })
 
 // radio.sendMessage({
-//     issi: 15432342,
+//     issi: 9012112,
 //     body: 'Hello World!',
 //     instantMessage: false,
 //     deliveryReport: true,
 //     consumedReport: false
 // });
 
-// radio.requestImmediateLocationReport({
-//     issi: 15432342,
-//     shortReport: true
-// });
+radio.requestImmediateLocationReport({
+    issi: 15432342,
+    shortReport: true
+});
 
 // radio.sendMessage({
 //     issi: '9015080',
@@ -64,73 +63,88 @@ const radio = new TetraJS('COM6', 460800);
 //     consumedReport: false
 // });
 
-var report = radio.requestImmediateLocationReport({
-    issi: 15432342,
-    shortReport: true
-});
+//15432342
 
-var report2 = radio.requestImmediateLocationReport({
-    issi: 12543343,
-    shortReport: true
-});
+// radio.sendMessage({
+//     issi: 15432342,
+//     body: `dfdfdff`,
+//     instantMessage: true,
+//     deliveryReport: true,
+//     consumedReport: false
+// });
 
-var report3 = radio.requestImmediateLocationReport({
-    issi: 9018300,
-    shortReport: true
-});
+// var report = radio.requestImmediateLocationReport({
+//     issi: 9012112,
+//     shortReport: true
+// });
 
-
-report.once('received', (msg)=>{
-    console.log('Received1: ', msg)
-
-    radio.sendMessage({
-        issi: msg.issi,
-        body: `${msg.latitude}, ${msg.longitude}`,
-        instantMessage: true,
-        deliveryReport: true,
-        consumedReport: false
-    });
-    
-})
-
-report2.once('received', (msg)=>{
-    console.log('Received2: ', msg)
-
-    radio.sendMessage({
-        issi: msg.issi,
-        body: `${msg.latitude}, ${msg.longitude}`,
-        instantMessage: true,
-        deliveryReport: true,
-        consumedReport: false
-    });
-})
-
-report3.once('received', (msg)=>{
-    console.log('Received3: ', msg)
-
-    radio.sendMessage({
-        issi: msg.issi,
-        body: `${msg.latitude}, ${msg.longitude}`,
-        instantMessage: true,
-        deliveryReport: true,
-        consumedReport: false
-    });
-})
-
-
-// radio.requestImmediateLocationReport({
+// var report2 = radio.requestImmediateLocationReport({
 //     issi: 12543343,
 //     shortReport: true
 // });
+
+// var report3 = radio.requestImmediateLocationReport({
+//     issi: 9018300,
+//     shortReport: true
+// });
+
+
+// report.once('received', (msg)=>{
+//     console.log('Received1: ', msg)
+
+//     radio.sendMessage({
+//         issi: msg.issi,
+//         body: `${msg.latitude}, ${msg.longitude}`,
+//         instantMessage: true,
+//         deliveryReport: true,
+//         consumedReport: false
+//     });
+    
+// })
+
+// report2.once('received', (msg)=>{
+//     console.log('Received2: ', msg)
+
+//     radio.sendMessage({
+//         issi: msg.issi,
+//         body: `${msg.latitude}, ${msg.longitude}`,
+//         instantMessage: true,
+//         deliveryReport: true,
+//         consumedReport: false
+//     });
+// })
+
+// report3.once('received', (msg)=>{
+//     console.log('Received3: ', msg)
+
+//     radio.sendMessage({
+//         issi: msg.issi,
+//         body: `${msg.latitude}, ${msg.longitude}`,
+//         instantMessage: true,
+//         deliveryReport: true,
+//         consumedReport: false
+//     });
+// })
+
+
+// // radio.requestImmediateLocationReport({
+// //     issi: 12543343,
+// //     shortReport: true
+// // });
 
 radio.on('gps', function (message) {
     console.log('GPS received: ', message);
 });
 
 
+radio.on('status', function (status) {
+    console.log('Status received: ', status);
+});
+
+
 
 // radio.requestBasicLocationParameters({
-//     issi: 15432342
+//     issi: 9012112
 // });
 
 //SEND MESSAGE

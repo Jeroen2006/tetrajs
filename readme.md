@@ -14,6 +14,7 @@ With this library you can send and receive various kinds of data from other radi
 - GPS LIP Short Location reports
 - Request GPS Config
 - Request GPS Position
+- Receive status messages
 
 
   
@@ -73,6 +74,10 @@ The library should work with every Motorola TETRA radio that has a PEI interface
 
     //'received-message' event is triggered when the radio receives a message (normal or instant)
 	radio.on('received-message', function (message) {
+	});
+
+	//'status' event is triggered when the radio receives a status message
+	radio.on('status', function (message) {
 	});
 		
 ## Class 'SDSMessage'

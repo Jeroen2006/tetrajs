@@ -135,3 +135,5 @@ package-lock.json
 messages.json
 gps/*
 old/
+test.js
+test2.js
