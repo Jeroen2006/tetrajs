@@ -26,11 +26,11 @@ const radio = new TetraJS('COM7', 460800);
 //     enableBacklog: false,
 // })
 
-// radio.enableGpsReporting({
-//     issi: 15432342,
-//     enableReporting: true,
-//     enableBacklog: false,
-// })
+radio.enableGpsReporting({
+    issi: 15432342,
+    enableReporting: true,
+    enableBacklog: false,
+})
 
 // var gpsReporting = radio.enableGpsReporting({
 //     issi: 9012112,
