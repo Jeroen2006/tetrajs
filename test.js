@@ -1,5 +1,5 @@
 const TetraJS = require('./index');
-const radio = new TetraJS('COM7', 460800);
+const radio = new TetraJS('COM16', 115200);
 
 // setInterval(() => {
 //     console.log(radio)
@@ -7,7 +7,7 @@ const radio = new TetraJS('COM7', 460800);
 
 
 // var presenceCheck = radio.sendPresenceCheck({
-//     issi: 12543343
+//     issi: 15432342
 // })
 
 // presenceCheck.on('result', function (result) {
@@ -26,11 +26,11 @@ const radio = new TetraJS('COM7', 460800);
 //     enableBacklog: false,
 // })
 
-radio.enableGpsReporting({
-    issi: 15432342,
-    enableReporting: true,
-    enableBacklog: false,
-})
+// radio.enableGpsReporting({
+//     issi: 15432342,
+//     enableReporting: true,
+//     enableBacklog: false,
+// })
 
 // var gpsReporting = radio.enableGpsReporting({
 //     issi: 9012112,
@@ -43,33 +43,42 @@ radio.enableGpsReporting({
 // })
 
 // radio.sendMessage({
-//     issi: 9012112,
-//     body: 'Hello World!',
+//     issi: 15432342,
+//     body: 'test',
 //     instantMessage: false,
 //     deliveryReport: true,
 //     consumedReport: false
 // });
 
-radio.requestImmediateLocationReport({
-    issi: 15432342,
-    shortReport: true
-});
+// radio.requestImmediateLocationReport({
+//     issi: 15432342,
+//     shortReport: true
+// });
 
 // radio.sendMessage({
-//     issi: '9015080',
-//     body: `sdsdsd`,
+//     issi: '15432342',
+//     body: `Je moeder`,
 //     instantMessage: true,
 //     deliveryReport: true,
 //     consumedReport: false
 // });
 
+radio.setDisplayString({
+    issi: 15432342,
+    body: 'hallo'
+})
+
 //15432342
+
+// radio.requestReportTriggers({
+//     issi: 15432342
+// })
 
 // radio.sendMessage({
 //     issi: 15432342,
-//     body: `dfdfdff`,
-//     instantMessage: true,
-//     deliveryReport: true,
+//     body: `AT+CTOM=0`,
+//     instantMessage: false,
+//     deliveryReport: false,
 //     consumedReport: false
 // });
 
