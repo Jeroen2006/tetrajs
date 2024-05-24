@@ -63,10 +63,27 @@ const radio = new TetraJS('COM16', 115200);
 //     consumedReport: false
 // });
 
-radio.setDisplayString({
-    issi: 15432342,
-    body: 'hallo'
+
+//reboot radio
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT R'
+// })
+
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT+CBC?'
+// })
+
+radio.sendCommand({
+    issi: 12543343,
+    body: 'AT+GSN?'
 })
+
+radio.on('remote-control-response', function (message) {
+    console.log('Remote control response: ', message);
+
+});
 
 //15432342
 
