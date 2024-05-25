@@ -54,14 +54,14 @@ const radio = new TetraJS('COM16', 115200);
 //     issi: 15432342,
 //     shortReport: true
 // });
-
-// radio.sendMessage({
-//     issi: '15432342',
-//     body: `Je moeder`,
-//     instantMessage: true,
-//     deliveryReport: true,
-//     consumedReport: false
-// });
+//12543343
+radio.sendMessage({
+    issi: '10010',
+    body: `Je moeder`,
+    instantMessage: true,
+    deliveryReport: false,
+    consumedReport: false
+});
 
 
 //reboot radio
@@ -70,10 +70,10 @@ const radio = new TetraJS('COM16', 115200);
 //     body: 'AT R'
 // })
 
-radio.sendCommand({
-    issi: 12543343,
-    body: 'AT+CBC?'
-})
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT+CBC?'
+// })
 
 // radio.sendCommand({
 //     issi: 12543343,
