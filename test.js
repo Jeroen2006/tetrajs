@@ -70,10 +70,10 @@ const radio = new TetraJS('COM16', 115200);
 //     body: 'AT R'
 // })
 
-// radio.sendCommand({
-//     issi: 12543343,
-//     body: 'AT+CBC?'
-// })
+radio.sendCommand({
+    issi: 12543343,
+    body: 'AT+CBC?'
+})
 
 // radio.sendCommand({
 //     issi: 12543343,
@@ -101,10 +101,10 @@ const radio = new TetraJS('COM16', 115200);
 // })
 
 
-radio.sendCommand({
-    issi: 12543343,
-    body: 'AT+CPBR=1,100',
-})
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT+CPBR=1,100',
+// })
 
 //contacten toevoegen: AT+CPBW=,9999,0,"TetraFleet"
 //contacten verwijderen: AT+CPBW=,9999
