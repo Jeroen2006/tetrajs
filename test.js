@@ -75,10 +75,43 @@ const radio = new TetraJS('COM16', 115200);
 //     body: 'AT+CBC?'
 // })
 
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT+CPBW=,99991,0,"TetraFleet1"',
+// })
+
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT+CPBW=,99992,0,"TetraFleet2"',
+// })
+
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT+CPBW=,99993,0,"TetraFleet3"',
+// })
+
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT+CPBW=,99994,0,"TetraFleet4"',
+// })
+
+// radio.sendCommand({
+//     issi: 12543343,
+//     body: 'AT+CPBW=,99995,0,"TetraFleet5"',
+// })
+
+
 radio.sendCommand({
     issi: 12543343,
-    body: 'AT+GSN?'
+    body: 'AT+CPBR=1,100',
 })
+
+//contacten toevoegen: AT+CPBW=,9999,0,"TetraFleet"
+//contacten verwijderen: AT+CPBW=,9999
+
+//RF Power: AT+CPWC="3L"
+//PIN Status: AT+CPIN?
+
 
 radio.on('remote-control-response', function (message) {
     console.log('Remote control response: ', message);
