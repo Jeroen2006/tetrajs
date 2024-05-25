@@ -42,26 +42,26 @@ const radio = new TetraJS('COM16', 115200);
 
 // })
 
-// radio.sendMessage({
-//     issi: 15432342,
-//     body: 'test',
-//     instantMessage: false,
-//     deliveryReport: true,
-//     consumedReport: false
-// });
+radio.sendMessage({
+    issi: 12543343,
+    body: 'test',
+    instantMessage: false,
+    deliveryReport: true,
+    consumedReport: false
+});
 
 // radio.requestImmediateLocationReport({
 //     issi: 15432342,
 //     shortReport: true
 // });
 //12543343
-radio.sendMessage({
-    issi: '10010',
-    body: `Je moeder`,
-    instantMessage: true,
-    deliveryReport: false,
-    consumedReport: false
-});
+// radio.sendMessage({
+//     issi: '901020400010010',
+//     body: `Je moeder`,
+//     instantMessage: true,
+//     deliveryReport: false,
+//     consumedReport: false
+// });
 
 
 //reboot radio
@@ -224,3 +224,9 @@ radio.on('status', function (status) {
 radio.on('received-message', function (message) {
     console.log('Message received: ', message);
 });
+
+radio.on('callStatus', function (callStatus) {
+    console.log('callStatus: ', callStatus);
+});
+
+
