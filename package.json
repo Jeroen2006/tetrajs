@@ -1,21 +1,20 @@
 {
-  "dependencies": {
-    "express": "^4.19.2",
-    "serialport": "^12.0.0"
-  },
   "name": "tetrajs",
-  "description": "This project aims to solve a very specific problem; being able to control & monitor your radios on a TETRA network.",
-  "version": "1.0.3",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "A library to interface with a Motorola TETRA radio and network",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jeroen2006/tetrajs.git"
   },
-  "author": "Jeroen de Kuijper",
-  "license": "CC BY-NC-ND 4.0",
+  "keywords": [
+    "tetra"
+  ],
+  "author": "Jeroen2006",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Jeroen2006/tetrajs/issues"
   },
